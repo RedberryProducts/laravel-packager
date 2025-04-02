@@ -14,7 +14,7 @@ class LaravelPackageInitCommand extends Command
     {
         $name = $this->argument('name');
 
-        $this->info('Hello ' . $name);
+        $this->info('Hello '.$name);
         $this->comment('All done');
 
         return self::SUCCESS;

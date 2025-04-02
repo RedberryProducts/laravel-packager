@@ -2,9 +2,9 @@
 
 namespace Redberry\LaravelPackageInit;
 
+use Redberry\LaravelPackageInit\Commands\LaravelPackageInitCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Redberry\LaravelPackageInit\Commands\LaravelPackageInitCommand;
 
 class LaravelPackageInitServiceProvider extends PackageServiceProvider
 {
