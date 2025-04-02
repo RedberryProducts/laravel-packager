@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "redberryproducts/laravel-package-init",
+    "description": "Package to easily initiate new package using spatie's laravel package skeleton",
     "keywords": [
-        ":vendor_name",
+        "Redberry",
         "laravel",
-        ":package_slug"
+        "laravel-package-init"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/redberryproducts/laravel-package-init",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Nika Jorjoliani",
+            "email": "nika@redberry.ge",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Redberry\\LaravelPackageInit\\": "src/",
+            "Redberry\\LaravelPackageInit\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Redberry\\LaravelPackageInit\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Redberry\\LaravelPackageInit\\LaravelPackageInitServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelPackageInit": "Redberry\\LaravelPackageInit\\Facades\\LaravelPackageInit"
             }
         }
     },
