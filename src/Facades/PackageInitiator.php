@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \Redberry\LaravelPackageInit\LaravelPackageInit
+ * @method static initialize(mixed $vendor, mixed $name)
  */
-class LaravelPackageInit extends Facade
+class PackageInitiator extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Redberry\LaravelPackageInit\LaravelPackageInit::class;
+        return \Redberry\LaravelPackageInit\PackageInitiator::class;
     }
 }
