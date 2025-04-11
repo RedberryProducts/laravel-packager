@@ -4,7 +4,7 @@ namespace Redberry\LaravelPackageInit;
 
 use Illuminate\Filesystem\Filesystem;
 
-readonly class PackageInitiator
+class PackageInitiator
 {
     private array $config;
 

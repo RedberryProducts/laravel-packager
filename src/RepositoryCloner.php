@@ -4,7 +4,7 @@ namespace Redberry\LaravelPackageInit;
 
 use Illuminate\Filesystem\Filesystem;
 
-readonly class RepositoryCloner
+class RepositoryCloner
 {
     public function __construct(private Filesystem $filesystem, private CommandRunner $commandRunner) {}
 
