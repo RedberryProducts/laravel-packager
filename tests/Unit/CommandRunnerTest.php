@@ -1,9 +1,10 @@
 <?php
+
 namespace Redberry\LaravelPackageInit {
 
     use RuntimeException;
 
-    if (!function_exists('Redberry\LaravelPackageInit\exec')) {
+    if (! function_exists('Redberry\LaravelPackageInit\exec')) {
         /**
          * Fake exec function.
          *
@@ -21,7 +22,7 @@ namespace Redberry\LaravelPackageInit {
         }
     }
 
-    if (!function_exists('Redberry\LaravelPackageInit\proc_open')) {
+    if (! function_exists('Redberry\LaravelPackageInit\proc_open')) {
         /**
          * Fake proc_open function.
          *
@@ -33,10 +34,11 @@ namespace Redberry\LaravelPackageInit {
             if (strpos($command, 'fail') !== false) {
                 return false;
             }
+
             return tmpfile();
         }
 
-        if (!function_exists('Redberry\LaravelPackageInit\proc_close')) {
+        if (! function_exists('Redberry\LaravelPackageInit\proc_close')) {
             /**
              * Fake proc_close function.
              *
@@ -46,13 +48,14 @@ namespace Redberry\LaravelPackageInit {
             function proc_close($process)
             {
                 fclose($process);
+
                 return 0;
             }
         }
     }
 
     it('runs a command successfully with run()', function () {
-        $runner = new CommandRunner();
+        $runner = new CommandRunner;
 
         $runner->run('echo "Hello, world"');
 
@@ -60,14 +63,14 @@ namespace Redberry\LaravelPackageInit {
     });
 
     it('throws an exception on run() when the command fails', function () {
-        $runner = new CommandRunner();
+        $runner = new CommandRunner;
 
-        expect(fn() => $runner->run('fail command'))
+        expect(fn () => $runner->run('fail command'))
             ->toThrow(RuntimeException::class, 'Command failed with return code 1: error');
     });
 
     it('runs an interactive command successfully with runInteractive()', function () {
-        $runner = new CommandRunner();
+        $runner = new CommandRunner;
 
         $runner->runInteractive('echo "Interactive Hello"');
 
@@ -75,10 +78,9 @@ namespace Redberry\LaravelPackageInit {
     });
 
     it('throws an exception on runInteractive() when the command fails', function () {
-        $runner = new CommandRunner();
+        $runner = new CommandRunner;
 
-        expect(fn() => $runner->runInteractive('fail interactive command'))
+        expect(fn () => $runner->runInteractive('fail interactive command'))
             ->toThrow(RuntimeException::class, 'Failed to execute interactive command: fail interactive command');
     });
 }
-

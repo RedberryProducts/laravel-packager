@@ -1,8 +1,8 @@
 <?php
 
-use Redberry\LaravelPackageInit\PackageInitiator;
 use Illuminate\Filesystem\Filesystem;
 use Mockery as Mock;
+use Redberry\LaravelPackageInit\PackageInitiator;
 
 beforeEach(function () {
     // Set up the configuration
