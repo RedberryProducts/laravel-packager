@@ -1,8 +1,8 @@
 <?php
 
-use Redberry\LaravelPackageInit\ComposerJsonUpdater;
 use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
+use Redberry\LaravelPackageInit\ComposerJsonUpdater;
 
 beforeEach(function () {
     $this->filesystem = m::mock(Filesystem::class);
@@ -83,4 +83,3 @@ it('does not duplicate repository or require-dev', function () {
 
     $this->updater->addRepository($packagePath, $vendor, $name);
 });
-

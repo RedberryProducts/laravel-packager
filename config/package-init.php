@@ -9,7 +9,7 @@ return [
             'runs' => [
                 'php configure.php',
             ],
-        ]
+        ],
     ],
     'packages_directory' => 'packages',
 ];
