@@ -1,5 +1,5 @@
 {
-    "name": "redberryproducts/laravel-package-init",
+    "name": "redberryproducts/laravel-packager",
     "description": "Package to easily initiate new package using spatie's laravel package skeleton",
     "keywords": [
         "Redberry",
