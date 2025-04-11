@@ -22,7 +22,7 @@ class CommandRunner
         $descriptorSpec = [
             0 => ['file', 'php://stdin', 'r'],
             1 => ['file', 'php://stdout', 'w'],
-            2 => ['file', 'php://stderr', 'w']
+            2 => ['file', 'php://stderr', 'w'],
         ];
 
         $process = proc_open($command, $descriptorSpec, $pipes);

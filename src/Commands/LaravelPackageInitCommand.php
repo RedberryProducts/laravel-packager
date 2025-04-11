@@ -13,23 +13,20 @@ class LaravelPackageInitCommand extends Command
 
     public function handle(): int
     {
-        list($vendor, $name) = $this->getVendorAndPackageName();
+        [$vendor, $name] = $this->getVendorAndPackageName();
 
         try {
             PackageInitiator::initialize($vendor, $name);
             $this->info("Package {$vendor}/{$name} created successfully!");
         } catch (\Exception $e) {
             $this->error('Failed to create package: '.$e->getMessage());
+
             return self::FAILURE;
         }
 
         return self::SUCCESS;
     }
 
-    /**
-     *
-     * @return array
-     */
     public function getVendorAndPackageName(): array
     {
         $name = $this->argument('name') ?? $this->ask('Enter package name');
@@ -39,6 +36,7 @@ class LaravelPackageInitCommand extends Command
         } else {
             $vendor = $this->ask('Enter vendor name (e.g., redberry)', 'redberry');
         }
-        return array($vendor, $name);
+
+        return [$vendor, $name];
     }
 }

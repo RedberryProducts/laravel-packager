@@ -20,5 +20,3 @@ return [
     ],
     'packages_directory' => base_path('packages'),
 ];
-
-

@@ -19,8 +19,6 @@ readonly class PackageInitiator
     /**
      * Initialize new package into the configured directory.
      *
-     * @param $vendor
-     * @param $name
      *
      * @throws \Exception
      */
@@ -44,10 +42,6 @@ readonly class PackageInitiator
     }
 
     /**
-     * @param  string  $packagePath
-     * @param  mixed  $packageUrl
-     *
-     * @return void
      * @throws \Exception
      */
     public function cloneRepository(string $packagePath, mixed $packageUrl): void
@@ -66,7 +60,7 @@ readonly class PackageInitiator
         $commands = $activeSkeleton['runs'] ?? [];
 
         foreach ($commands as $command) {
-            $this->commandRunner->runInteractive("cd {$packagePath} && " . $command);
+            $this->commandRunner->runInteractive("cd {$packagePath} && ".$command);
         }
     }
 }

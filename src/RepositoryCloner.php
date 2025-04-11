@@ -6,17 +6,11 @@ use Illuminate\Filesystem\Filesystem;
 
 readonly class RepositoryCloner
 {
-    public function __construct(private Filesystem $filesystem, private CommandRunner $commandRunner)
-    {
-    }
+    public function __construct(private Filesystem $filesystem, private CommandRunner $commandRunner) {}
 
     /**
      * Clone a repository into the specified path.
      *
-     * @param  string  $path
-     * @param  string  $url
-     * @param  string  $branch
-     * @param  bool  $unlink
      *
      * @return void
      */
@@ -28,5 +22,4 @@ readonly class RepositoryCloner
             $this->filesystem->deleteDirectory($path.'/.git');
         }
     }
-
 }
