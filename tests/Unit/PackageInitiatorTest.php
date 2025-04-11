@@ -6,27 +6,31 @@ use Redberry\LaravelPackageInit\PackageInitiator;
 
 beforeEach(function () {
     // Set up the configuration
-    config(['package-init' => [
-        'packages_directory' => '/packages',
-        'default_skeleton' => 'laravel',
-        'skeletons' => [
-            'laravel' => [
-                'url' => 'https://github.com/laravel/skeleton.git',
-                'runs' => ['composer install', 'npm install'],
+    config([
+        'package-init' => [
+            'packages_directory' => '/packages',
+            'default_skeleton' => 'laravel',
+            'skeletons' => [
+                'laravel' => [
+                    'url' => 'https://github.com/laravel/skeleton.git',
+                    'runs' => ['composer install', 'npm install'],
+                ],
             ],
-        ],
-    ]]);
+        ]
+    ]);
 
     // Mock dependencies
     $this->cloner = Mock::mock(\Redberry\LaravelPackageInit\RepositoryCloner::class);
     $this->filesystem = Mock::mock(Filesystem::class);
     $this->commandRunner = Mock::mock(\Redberry\LaravelPackageInit\CommandRunner::class);
+    $this->composerUpdater = Mock::mock(\Redberry\LaravelPackageInit\ComposerJsonUpdater::class);
 
     // Instantiate the class
     $this->initiator = new PackageInitiator(
         $this->cloner,
         $this->filesystem,
-        $this->commandRunner
+        $this->commandRunner,
+        $this->composerUpdater,
     );
 });
 
@@ -55,6 +59,9 @@ it('initializes a new package successfully', function () {
     $this->commandRunner->shouldReceive('runInteractive')
         ->with("cd {$packagePath} && composer install")
         ->once();
+
+    $this->composerUpdater->shouldReceive('addRepository');
+
     $this->commandRunner->shouldReceive('runInteractive')
         ->with("cd {$packagePath} && npm install")
         ->once();
@@ -77,24 +84,26 @@ it('throws an exception if package directory already exists', function () {
         ->once()
         ->andReturn(true);
 
+    $this->composerUpdater->shouldNotReceive('addRepository');
+
     // Expect no cloning or commands
     $this->cloner->shouldNotReceive('clone');
     $this->commandRunner->shouldNotReceive('runInteractive');
 
     // Expect exception
-    expect(fn () => $this->initiator->initialize($vendor, $name))
+    expect(fn() => $this->initiator->initialize($vendor, $name))
         ->toThrow(\Exception::class, "Package already exists at {$packagePath}");
 });
 
 it('handles empty configuration commands', function () {
     // Override config with no runs
     config(['package-init.skeletons.laravel.runs' => []]);
-
     // Instantiate the class
     $this->initiator = new PackageInitiator(
         $this->cloner,
         $this->filesystem,
-        $this->commandRunner
+        $this->commandRunner,
+        $this->composerUpdater
     );
 
     $vendor = 'redberry';
@@ -107,6 +116,8 @@ it('handles empty configuration commands', function () {
         ->with($packagePath)
         ->once()
         ->andReturn(false);
+
+    $this->composerUpdater->shouldReceive('addRepository');
 
     // Mock cloner
     $this->cloner->shouldReceive('clone')
@@ -122,15 +133,18 @@ it('handles empty configuration commands', function () {
 
 it('handles missing runs key in skeleton config', function () {
     // Override config with no runs key
-    config(['package-init.skeletons.laravel' => [
-        'url' => 'https://github.com/laravel/skeleton.git',
-    ]]);
+    config([
+        'package-init.skeletons.laravel' => [
+            'url' => 'https://github.com/laravel/skeleton.git',
+        ]
+    ]);
 
     // Instantiate the class
     $this->initiator = new PackageInitiator(
         $this->cloner,
         $this->filesystem,
-        $this->commandRunner
+        $this->commandRunner,
+        $this->composerUpdater
     );
 
     $vendor = 'redberry';
@@ -151,6 +165,8 @@ it('handles missing runs key in skeleton config', function () {
 
     // Expect no commands
     $this->commandRunner->shouldNotReceive('runInteractive');
+
+    $this->composerUpdater->shouldReceive('addRepository');
 
     // Run initialize
     $this->initiator->initialize($vendor, $name);
@@ -177,8 +193,10 @@ it('handles cloning failure', function () {
     // Expect no commands
     $this->commandRunner->shouldNotReceive('runInteractive');
 
+    $this->composerUpdater->shouldReceive('addRepository');
+
     // Expect exception
-    expect(fn () => $this->initiator->initialize($vendor, $name))
+    expect(fn() => $this->initiator->initialize($vendor, $name))
         ->toThrow(\Exception::class, 'Clone failed');
 });
 
@@ -204,6 +222,8 @@ it('validates empty vendor or name', function () {
     $this->commandRunner->shouldReceive('runInteractive')
         ->with("cd {$packagePath} && npm install")
         ->once();
+
+    $this->composerUpdater->shouldReceive('addRepository')->once();
 
     // Should not throw, but path will have empty vendor
     $this->initiator->initialize('', 'example');
@@ -234,21 +254,8 @@ it('handles special characters in vendor and name', function () {
         ->with("cd {$packagePath} && npm install")
         ->once();
 
+    $this->composerUpdater->shouldReceive('addRepository');
+
     // Should handle special characters without issues
     $this->initiator->initialize($vendor, $name);
-});
-
-it('has an empty updateComposerJson method', function () {
-    // Since updateComposerJson is a TODO, we expect it to do nothing
-    // This test can be updated once the method is implemented
-    $vendor = 'redberry';
-    $packagePath = '/packages/redberry/example';
-
-    // Use reflection to call private method
-    $method = new \ReflectionMethod(PackageInitiator::class, 'updateComposerJson');
-    $method->setAccessible(true);
-    $method->invoke($this->initiator, $packagePath, $vendor);
-
-    // Placeholder assertion
-    expect(true)->toBeTrue();
 });

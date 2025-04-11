@@ -2,6 +2,7 @@
 
 namespace Redberry\LaravelPackageInit;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 
 class PackageInitiator
@@ -11,7 +12,8 @@ class PackageInitiator
     public function __construct(
         private RepositoryCloner $cloner,
         private Filesystem $filesystem,
-        private CommandRunner $commandRunner
+        private CommandRunner $commandRunner,
+        private ComposerJsonUpdater $composerJsonUpdater,
     ) {
         $this->config = config('package-init');
     }
@@ -31,14 +33,17 @@ class PackageInitiator
 
         $this->cloneRepository($packagePath, $packageUrl);
 
-        $this->updateComposerJson($packagePath, $vendor);
+        $this->updateComposerJson($packagePath, $vendor, $name);
 
         $this->runConfigurationCommands($packagePath);
     }
 
-    private function updateComposerJson(string $packagePath, $vendor): void
+    /**
+     * @throws FileNotFoundException
+     */
+    private function updateComposerJson(string $packagePath, string $vendor, string $name): void
     {
-        // TODO: implement this method
+        $this->composerJsonUpdater->addRepository($packagePath, $vendor, $name);
     }
 
     /**
