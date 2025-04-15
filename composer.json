@@ -4,9 +4,9 @@
     "keywords": [
         "Redberry",
         "laravel",
-        "laravel-package-init"
+        "laravel-packager"
     ],
-    "homepage": "https://github.com/redberryproducts/laravel-package-init",
+    "homepage": "https://github.com/redberryproducts/laravel-packager",
     "license": "MIT",
     "authors": [
         {
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Redberry\\LaravelPackageInit\\": "src/",
-            "Redberry\\LaravelPackageInit\\Database\\Factories\\": "database/factories/"
+            "Redberry\\LaravelPackager\\": "src/",
+            "Redberry\\LaravelPackager\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Redberry\\LaravelPackageInit\\Tests\\": "tests/",
+            "Redberry\\LaravelPackager\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Redberry\\LaravelPackageInit\\LaravelPackageInitServiceProvider"
+                "Redberry\\LaravelPackager\\LaravelPackagerServiceProvider"
             ],
             "aliases": {
-                "LaravelPackageInit": "Redberry\\LaravelPackageInit\\Facades\\LaravelPackageInit"
+                "LaravelPackager": "Redberry\\LaravelPackager\\Facades\\LaravelPackager"
             }
         }
     },

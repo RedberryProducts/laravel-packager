@@ -1,6 +1,6 @@
 <?php
 
-namespace Redberry\LaravelPackageInit;
+namespace Redberry\LaravelPackager;
 
 class CommandRunner
 {

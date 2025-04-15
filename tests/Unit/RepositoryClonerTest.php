@@ -6,8 +6,8 @@ namespace Tests\Unit;
 
 use Illuminate\Filesystem\Filesystem;
 use Mockery;
-use Redberry\LaravelPackageInit\CommandRunner;
-use Redberry\LaravelPackageInit\RepositoryCloner;
+use Redberry\LaravelPackager\CommandRunner;
+use Redberry\LaravelPackager\RepositoryCloner;
 use RuntimeException;
 
 afterEach(function () {

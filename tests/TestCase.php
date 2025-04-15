@@ -1,10 +1,10 @@
 <?php
 
-namespace Redberry\LaravelPackageInit\Tests;
+namespace Redberry\LaravelPackager\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Redberry\LaravelPackageInit\LaravelPackageInitServiceProvider;
+use Redberry\LaravelPackager\LaravelPackagerServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Redberry\\LaravelPackageInit\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Redberry\\LaravelPackager\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelPackageInitServiceProvider::class,
+            LaravelPackagerServiceProvider::class,
         ];
     }
 
