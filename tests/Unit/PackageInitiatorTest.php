@@ -174,7 +174,6 @@ it('handles missing runs key in skeleton config', function () {
     $this->initiator->initialize($vendor, $name);
 });
 
-
 it('handles different branch names in config', function () {
     // Override config with no runs key
     config([
