@@ -16,7 +16,7 @@ beforeEach(function () {
                     'runs' => ['composer install', 'npm install'],
                 ],
             ],
-        ]
+        ],
     ]);
 
     // Mock dependencies
@@ -91,7 +91,7 @@ it('throws an exception if package directory already exists', function () {
     $this->commandRunner->shouldNotReceive('runInteractive');
 
     // Expect exception
-    expect(fn() => $this->initiator->initialize($vendor, $name))
+    expect(fn () => $this->initiator->initialize($vendor, $name))
         ->toThrow(\Exception::class, "Package already exists at {$packagePath}");
 });
 
@@ -136,7 +136,7 @@ it('handles missing runs key in skeleton config', function () {
     config([
         'package-init.skeletons.laravel' => [
             'url' => 'https://github.com/laravel/skeleton.git',
-        ]
+        ],
     ]);
 
     // Instantiate the class
@@ -196,7 +196,7 @@ it('handles cloning failure', function () {
     $this->composerUpdater->shouldReceive('addRepository');
 
     // Expect exception
-    expect(fn() => $this->initiator->initialize($vendor, $name))
+    expect(fn () => $this->initiator->initialize($vendor, $name))
         ->toThrow(\Exception::class, 'Clone failed');
 });
 
