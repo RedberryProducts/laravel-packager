@@ -30,8 +30,9 @@ class PackageInitiator
     ): void {
         $packagePath = $this->config['packages_directory'].'/'.$vendor.'/'.$name;
         $packageUrl = $this->config['skeletons'][$this->config['default_skeleton']]['url'];
+        $branch = $this->config['skeletons'][$this->config['default_skeleton']]['branch'];
 
-        $this->cloneRepository($packagePath, $packageUrl);
+        $this->cloneRepository($packagePath, $packageUrl, $branch);
 
         $this->updateComposerJson($packagePath, $vendor, $name);
 
@@ -49,13 +50,13 @@ class PackageInitiator
     /**
      * @throws \Exception
      */
-    public function cloneRepository(string $packagePath, mixed $packageUrl): void
+    public function cloneRepository(string $packagePath, mixed $packageUrl, string $branch): void
     {
         if ($this->filesystem->exists($packagePath)) {
             throw new \Exception("Package already exists at {$packagePath}");
         }
 
-        $this->cloner->clone($packagePath, $packageUrl, 'main', true);
+        $this->cloner->clone($packagePath, $packageUrl, $branch, true);
     }
 
     private function runConfigurationCommands($packagePath)
