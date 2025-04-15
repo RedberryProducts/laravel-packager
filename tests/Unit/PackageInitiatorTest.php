@@ -13,6 +13,7 @@ beforeEach(function () {
             'skeletons' => [
                 'laravel' => [
                     'url' => 'https://github.com/laravel/skeleton.git',
+                    'branch' => 'main',
                     'runs' => ['composer install', 'npm install'],
                 ],
             ],
@@ -136,6 +137,7 @@ it('handles missing runs key in skeleton config', function () {
     config([
         'package-init.skeletons.laravel' => [
             'url' => 'https://github.com/laravel/skeleton.git',
+            'branch' => 'main',
         ],
     ]);
 
