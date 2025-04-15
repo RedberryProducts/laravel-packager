@@ -174,6 +174,49 @@ it('handles missing runs key in skeleton config', function () {
     $this->initiator->initialize($vendor, $name);
 });
 
+
+it('handles different branch names in config', function () {
+    // Override config with no runs key
+    config([
+        'package-init.skeletons.laravel' => [
+            'url' => 'https://github.com/laravel/skeleton.git',
+            'branch' => 'test-branch',
+        ],
+    ]);
+
+    // Instantiate the class
+    $this->initiator = new PackageInitiator(
+        $this->cloner,
+        $this->filesystem,
+        $this->commandRunner,
+        $this->composerUpdater
+    );
+
+    $vendor = 'redberry';
+    $name = 'example';
+    $packagePath = "/packages/{$vendor}/{$name}";
+    $packageUrl = 'https://github.com/laravel/skeleton.git';
+
+    // Mock filesystem
+    $this->filesystem->shouldReceive('exists')
+        ->with($packagePath)
+        ->once()
+        ->andReturn(false);
+
+    // Mock cloner
+    $this->cloner->shouldReceive('clone')
+        ->with($packagePath, $packageUrl, 'test-branch', true)
+        ->once();
+
+    // Expect no commands
+    $this->commandRunner->shouldNotReceive('runInteractive');
+
+    $this->composerUpdater->shouldReceive('addRepository');
+
+    // Run initialize
+    $this->initiator->initialize($vendor, $name);
+});
+
 it('handles cloning failure', function () {
     $vendor = 'redberry';
     $name = 'example';
