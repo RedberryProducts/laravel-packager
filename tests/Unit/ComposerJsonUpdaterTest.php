@@ -2,7 +2,7 @@
 
 use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
-use Redberry\LaravelPackageInit\ComposerJsonUpdater;
+use Redberry\LaravelPackager\ComposerJsonUpdater;
 
 beforeEach(function () {
     $this->filesystem = m::mock(Filesystem::class);

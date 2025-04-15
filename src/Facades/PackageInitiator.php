@@ -1,18 +1,18 @@
 <?php
 
-namespace Redberry\LaravelPackageInit\Facades;
+namespace Redberry\LaravelPackager\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Redberry\LaravelPackageInit\LaravelPackageInit
+ * @see \Redberry\LaravelPackager\LaravelPackager
  *
- * @method static initialize(mixed $vendor, mixed $name)
+ * @method static void initialize(string $vendor, string $package, array $options = [])
  */
 class PackageInitiator extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Redberry\LaravelPackageInit\PackageInitiator::class;
+        return \Redberry\LaravelPackager\PackageInitiator::class;
     }
 }

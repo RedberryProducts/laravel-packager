@@ -1,10 +1,10 @@
 <?php
 
-namespace Redberry\LaravelPackageInit {
+namespace Redberry\LaravelPackager {
 
     use RuntimeException;
 
-    if (! function_exists('Redberry\LaravelPackageInit\exec')) {
+    if (! function_exists('Redberry\LaravelPackager\exec')) {
         /**
          * Fake exec function.
          *
@@ -22,7 +22,7 @@ namespace Redberry\LaravelPackageInit {
         }
     }
 
-    if (! function_exists('Redberry\LaravelPackageInit\proc_open')) {
+    if (! function_exists('Redberry\LaravelPackager\proc_open')) {
         /**
          * Fake proc_open function.
          *
@@ -38,7 +38,7 @@ namespace Redberry\LaravelPackageInit {
             return tmpfile();
         }
 
-        if (! function_exists('Redberry\LaravelPackageInit\proc_close')) {
+        if (! function_exists('Redberry\LaravelPackager\proc_close')) {
             /**
              * Fake proc_close function.
              *

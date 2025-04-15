@@ -1,12 +1,12 @@
 <?php
 
-namespace Redberry\LaravelPackageInit;
+namespace Redberry\LaravelPackager;
 
-use Redberry\LaravelPackageInit\Commands\LaravelPackageInitCommand;
+use Redberry\LaravelPackager\Commands\MakePackageCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelPackageInitServiceProvider extends PackageServiceProvider
+class LaravelPackagerServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class LaravelPackageInitServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-package-init')
+            ->name('laravel-packager')
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_laravel_package_init_table')
-            ->hasCommand(LaravelPackageInitCommand::class);
+            ->hasCommand(MakePackageCommand::class);
     }
 }

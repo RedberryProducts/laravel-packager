@@ -1,6 +1,6 @@
 <?php
 
-namespace Redberry\LaravelPackageInit;
+namespace Redberry\LaravelPackager;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
@@ -15,7 +15,7 @@ class PackageInitiator
         private CommandRunner $commandRunner,
         private ComposerJsonUpdater $composerJsonUpdater,
     ) {
-        $this->config = config('package-init');
+        $this->config = config('packager');
     }
 
     /**

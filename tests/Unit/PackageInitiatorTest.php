@@ -2,12 +2,12 @@
 
 use Illuminate\Filesystem\Filesystem;
 use Mockery as Mock;
-use Redberry\LaravelPackageInit\PackageInitiator;
+use Redberry\LaravelPackager\PackageInitiator;
 
 beforeEach(function () {
     // Set up the configuration
     config([
-        'package-init' => [
+        'packager' => [
             'packages_directory' => '/packages',
             'default_skeleton' => 'laravel',
             'skeletons' => [
@@ -21,10 +21,10 @@ beforeEach(function () {
     ]);
 
     // Mock dependencies
-    $this->cloner = Mock::mock(\Redberry\LaravelPackageInit\RepositoryCloner::class);
+    $this->cloner = Mock::mock(\Redberry\LaravelPackager\RepositoryCloner::class);
     $this->filesystem = Mock::mock(Filesystem::class);
-    $this->commandRunner = Mock::mock(\Redberry\LaravelPackageInit\CommandRunner::class);
-    $this->composerUpdater = Mock::mock(\Redberry\LaravelPackageInit\ComposerJsonUpdater::class);
+    $this->commandRunner = Mock::mock(\Redberry\LaravelPackager\CommandRunner::class);
+    $this->composerUpdater = Mock::mock(\Redberry\LaravelPackager\ComposerJsonUpdater::class);
 
     // Instantiate the class
     $this->initiator = new PackageInitiator(
@@ -98,7 +98,7 @@ it('throws an exception if package directory already exists', function () {
 
 it('handles empty configuration commands', function () {
     // Override config with no runs
-    config(['package-init.skeletons.laravel.runs' => []]);
+    config(['packager.skeletons.laravel.runs' => []]);
     // Instantiate the class
     $this->initiator = new PackageInitiator(
         $this->cloner,
@@ -135,7 +135,7 @@ it('handles empty configuration commands', function () {
 it('handles missing runs key in skeleton config', function () {
     // Override config with no runs key
     config([
-        'package-init.skeletons.laravel' => [
+        'packager.skeletons.laravel' => [
             'url' => 'https://github.com/laravel/skeleton.git',
             'branch' => 'main',
         ],
@@ -178,7 +178,7 @@ it('handles missing runs key in skeleton config', function () {
 it('handles different branch names in config', function () {
     // Override config with no runs key
     config([
-        'package-init.skeletons.laravel' => [
+        'packager.skeletons.laravel' => [
             'url' => 'https://github.com/laravel/skeleton.git',
             'branch' => 'test-branch',
         ],

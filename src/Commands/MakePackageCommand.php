@@ -1,11 +1,11 @@
 <?php
 
-namespace Redberry\LaravelPackageInit\Commands;
+namespace Redberry\LaravelPackager\Commands;
 
 use Illuminate\Console\Command;
-use Redberry\LaravelPackageInit\Facades\PackageInitiator;
+use Redberry\LaravelPackager\Facades\PackageInitiator;
 
-class LaravelPackageInitCommand extends Command
+class MakePackageCommand extends Command
 {
     public $signature = 'make:package {name?}';
 

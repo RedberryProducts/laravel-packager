@@ -1,6 +1,6 @@
 <?php
 
-namespace Redberry\LaravelPackageInit;
+namespace Redberry\LaravelPackager;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;

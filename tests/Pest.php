@@ -1,5 +1,5 @@
 <?php
 
-use Redberry\LaravelPackageInit\Tests\TestCase;
+use Redberry\LaravelPackager\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

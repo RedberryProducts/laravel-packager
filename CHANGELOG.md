@@ -1,3 +1,3 @@
 # Changelog
 
-All notable changes to `laravel-package-init` will be documented in this file.
+All notable changes to `laravel-packager` will be documented in this file.
