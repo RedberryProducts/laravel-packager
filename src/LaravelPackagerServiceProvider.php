@@ -18,8 +18,6 @@ class LaravelPackagerServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-packager')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_package_init_table')
             ->hasCommand(MakePackageCommand::class);
     }
 }
